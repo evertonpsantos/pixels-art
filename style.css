@@ -6,6 +6,8 @@ body {
 .color {
    border: black solid 1px;
    display: inline-block;
+   width: 20px;
+   height: 20px;
 }
 
 #black-color {
