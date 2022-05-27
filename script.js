@@ -2,13 +2,61 @@ const blackColor = document.getElementById('black-color');
 const redColor = document.getElementById('red-color');
 const blueColor = document.getElementById('blue-color');
 const greenColor = document.getElementById('green-color');
+const buttonGenerateBoard = document.getElementById('generate-board');
+
+function colorPixel(event) {
+  const parameter = event;
+  const selectedColor = document.querySelector('.selected');
+  const cssObj = window.getComputedStyle(selectedColor);
+  const bgColor = cssObj.getPropertyValue('background-color');
+  parameter.target.style.backgroundColor = bgColor;
+}
+
+function createBoardSection() {
+  const body = document.querySelector('body');
+  const boardSection = document.createElement('div');
+  boardSection.id = 'pixel-board';
+  body.appendChild(boardSection);
+}
+
+createBoardSection();
+
+function createBoard(n) {
+  const pixelBoardSection = document.getElementById('pixel-board');
+  for (let i = 0; i < n; i += 1) {
+    const newRow = document.createElement('div');
+    newRow.classList.add('row');
+    for (let index = 0; index < n; index += 1) {
+      const newCell = document.createElement('div');
+      newCell.classList.add('pixel');
+      newRow.appendChild(newCell);
+      newCell.addEventListener('click', colorPixel);
+    }
+    pixelBoardSection.appendChild(newRow);
+  }
+}
+
+createBoard(5);
+
+buttonGenerateBoard.addEventListener('click', () => {
+  const pixelBoardSection = document.getElementById('pixel-board');
+  pixelBoardSection.remove();
+  createBoardSection();
+  const input = document.getElementById('board-size').value;
+  createBoard(input);
+
+  if (input === '') {
+    alert('Board inválido!');
+  }
+});
 
 function selectColor(event) {
+  const parameter = event;
   const previousSelectedElement = document.querySelector('.selected');
   previousSelectedElement.style.borderColor = null;
   previousSelectedElement.classList.remove('selected');
   event.target.classList.add('selected');
-  event.target.style.borderColor = 'gold';
+  parameter.target.style.borderColor = 'gold';
 }
 
 blackColor.addEventListener('click', selectColor);
@@ -16,22 +64,11 @@ redColor.addEventListener('click', selectColor);
 blueColor.addEventListener('click', selectColor);
 greenColor.addEventListener('click', selectColor);
 
-function colorPixel(event) {
-   const selectedColor = document.querySelector('.selected');
-   const cssObj = window.getComputedStyle(selectedColor);
-   const bgColor = cssObj.getPropertyValue('background-color');
-   event.target.style.backgroundColor = bgColor;
-}
-
-const pixelsBrancos = document.querySelectorAll('.pixel');
-for (let i = 0; i < pixelsBrancos.length; i += 1) {
-   pixelsBrancos[i].addEventListener('click', colorPixel);
-}
-
 function clearBoard() {
-   for (let i = 0; i < pixelsBrancos.length; i += 1) {
-      pixelsBrancos[i].style.backgroundColor = 'white';
-   }
+  const pixelsBrancos = document.getElementsByClassName('pixel');
+  for (let i = 0; i < pixelsBrancos.length; i += 1) {
+    pixelsBrancos[i].style.backgroundColor = 'white';
+  }
 }
 
 const clearButton = document.getElementById('clear-board');
