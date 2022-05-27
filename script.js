@@ -22,7 +22,7 @@ function createBoardSection() {
 createBoardSection();
 
 function createBoard(n) {
-  const pixelBoardSection = document.querySelector('pixel-board');
+  const pixelBoardSection = document.getElementById('pixel-board');
   for (let i = 0; i < n; i += 1) {
     const newRow = document.createElement('div');
     newRow.classList.add('row');
@@ -49,6 +49,7 @@ buttonGenerateBoard.addEventListener('click', () => {
   if (input > 50) {
     input = 50;
   }
+
   const pixelBoardSection = document.getElementById('pixel-board');
   pixelBoardSection.remove();
   createBoardSection();
@@ -94,4 +95,3 @@ function generateRandomColor() {
 window.onload = () => {
   generateRandomColor();
 };
-
