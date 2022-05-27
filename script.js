@@ -22,7 +22,7 @@ function createBoardSection() {
 createBoardSection();
 
 function createBoard(n) {
-  const pixelBoardSection = document.getElementById('pixel-board');
+  const pixelBoardSection = document.querySelector('pixel-board');
   for (let i = 0; i < n; i += 1) {
     const newRow = document.createElement('div');
     newRow.classList.add('row');
@@ -49,7 +49,6 @@ buttonGenerateBoard.addEventListener('click', () => {
   if (input > 50) {
     input = 50;
   }
-
   const pixelBoardSection = document.getElementById('pixel-board');
   pixelBoardSection.remove();
   createBoardSection();
@@ -79,3 +78,19 @@ function clearBoard() {
 
 const clearButton = document.getElementById('clear-board');
 clearButton.addEventListener('click', clearBoard);
+
+function generateRandomColor() {
+  const secondColor = document.getElementById('red-color');
+  const thirdColor = document.getElementById('blue-color');
+  const fourthColor = document.getElementById('green-color');
+  const red = Math.floor(Math.random() * 255);
+  const green = Math.floor(Math.random() * 255);
+  const blue = Math.floor(Math.random() * 255);
+  secondColor.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+  thirdColor.style.backgroundColor = `rgb(${green}, ${blue}, ${red})`;
+  fourthColor.style.backgroundColor = `rgb(${blue}, ${red}, ${red})`;
+}
+
+window.onload = () => {
+  generateRandomColor();
+};
