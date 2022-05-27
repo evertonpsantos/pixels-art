@@ -39,15 +39,21 @@ function createBoard(n) {
 createBoard(5);
 
 buttonGenerateBoard.addEventListener('click', () => {
-  const pixelBoardSection = document.getElementById('pixel-board');
-  pixelBoardSection.remove();
-  createBoardSection();
-  const input = document.getElementById('board-size').value;
-  createBoard(input);
-
+  let input = document.getElementById('board-size').value;
   if (input === '') {
     alert('Board inválido!');
   }
+  if (input < 5) {
+    input = 5;
+  }
+  if (input > 50) {
+    input = 50;
+  }
+
+  const pixelBoardSection = document.getElementById('pixel-board');
+  pixelBoardSection.remove();
+  createBoardSection();
+  createBoard(input);
 });
 
 function selectColor(event) {
