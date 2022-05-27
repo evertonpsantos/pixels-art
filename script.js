@@ -94,3 +94,4 @@ function generateRandomColor() {
 window.onload = () => {
   generateRandomColor();
 };
+// 
