@@ -2,6 +2,7 @@ const blackColor = document.getElementById('black-color');
 const redColor = document.getElementById('red-color');
 const blueColor = document.getElementById('blue-color');
 const greenColor = document.getElementById('green-color');
+const randomizeButton = document.getElementById('randomize');
 const buttonGenerateBoard = document.getElementById('generate-board');
 
 function colorPixel(event) {
@@ -46,10 +47,9 @@ buttonGenerateBoard.addEventListener('click', () => {
   if (input < 5) {
     input = 5;
   }
-  if (input > 50) {
-    input = 50;
+  if (input > 30) {
+    return alert('Até 30px!');
   }
-
   const pixelBoardSection = document.getElementById('pixel-board');
   pixelBoardSection.remove();
   createBoardSection();
@@ -60,9 +60,11 @@ function selectColor(event) {
   const parameter = event;
   const previousSelectedElement = document.querySelector('.selected');
   previousSelectedElement.style.borderColor = null;
+  previousSelectedElement.style.boxShadow = null;
   previousSelectedElement.classList.remove('selected');
-  event.target.classList.add('selected');
+  parameter.target.classList.add('selected');
   parameter.target.style.borderColor = 'gold';
+  parameter.target.style.boxShadow = '0px 2px 10px goldenrod';
 }
 
 blackColor.addEventListener('click', selectColor);
@@ -91,6 +93,8 @@ function generateRandomColor() {
   thirdColor.style.backgroundColor = `rgb(${green}, ${blue}, ${red})`;
   fourthColor.style.backgroundColor = `rgb(${blue}, ${red}, ${red})`;
 }
+
+randomizeButton.addEventListener('click', generateRandomColor);
 
 window.onload = () => {
   generateRandomColor();
